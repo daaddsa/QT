@@ -165,47 +165,87 @@
 
 ---
 
-## 7. UI 详细设计
+## 7. UI 详细设计 (增强版)
 
-### 7.1 服务器端 (chatServer)
+本系统致力于打造一个完整的即时通讯体验，UI 设计参考现代 IM 软件（如 QQ、微信）的布局风格。
 
-服务器端界面主要用于管理员监控系统运行状态，只需一个主窗口。
+### 7.1 客户端 (multipleChat)
 
-#### 页面：主控制台 (MainWindow)
-*   **功能目标**: 控制服务器启停，查看实时日志。
+客户端采用多窗口与主面板结合的设计模式。
+
+#### 页面 1：登录与注册 (LoginWidget)
+*   **功能**: 用户身份验证与新用户注册。
+*   **实现方式**: 使用 `QStackedWidget` 在登录页和注册页之间切换。
 *   **控件布局**:
-    1.  **控制区 (Top)**:
-        *   `QLabel`: "监听端口:"
-        *   `QSpinBox`: 设置端口号 (默认 1234)。
-        *   `QPushButton`: "启动服务器" (点击后变更为 "停止服务器")。
-    2.  **日志区 (Center)**:
-        *   `QTextBrowser` 或 `QPlainTextEdit`: 只读，显示服务器的所有活动日志（如 "Client A connected", "Forwarded message..."）。
-    3.  **状态栏 (Bottom)**:
-        *   `QLabel`: 显示当前在线人数。
+    *   **登录页 (Index 0)**:
+        *   `QLabel`: Logo 或标题 "MultipleChat"。
+        *   `QLineEdit` (txtAccount): 账号输入框 (Placeholder: "请输入账号").
+        *   `QLineEdit` (txtPassword): 密码输入框 (EchoMode: Password).
+        *   `QLineEdit` (txtServerIP): 服务器地址 (默认 127.0.0.1, 可折叠或放置于设置中).
+        *   `QPushButton` (btnLogin): "登录" 按钮.
+        *   `QPushButton` (btnToRegister): "注册账号" 链接/按钮.
+    *   **注册页 (Index 1)**:
+        *   `QLabel`: 标题 "新用户注册"。
+        *   `QLineEdit`: 账号 (必填).
+        *   `QLineEdit`: 昵称 (必填).
+        *   `QLineEdit`: 密码 (必填).
+        *   `QLineEdit`: 确认密码.
+        *   `QPushButton` (btnRegister): "立即注册".
+        *   `QPushButton` (btnBackToLogin): "返回登录".
 
-### 7.2 客户端 (multipleChat)
-
-客户端包含两个主要交互界面：登录连接界面和聊天主界面。
-
-#### 页面 1：登录对话框 (LoginDialog / Initial View)
-*   **功能目标**: 获取连接信息和用户身份。
+#### 页面 2：主界面 (MainWindow)
+*   **功能**: 好友管理、群组管理、发起聊天。
+*   **布局风格**: 侧边栏导航 + 内容列表 + (可选) 右侧聊天预览。推荐采用 **类似 QQ 的长条形面板** 设计。
 *   **控件布局**:
-    *   `QLabel` + `QLineEdit`: "服务器地址" (默认 127.0.0.1)。
-    *   `QLabel` + `QSpinBox`: "端口号" (默认 1234)。
-    *   `QLabel` + `QLineEdit`: "用户昵称" (必填)。
-    *   `QPushButton`: "登录/连接"。
-    *   *注：此界面可以在程序启动时作为模态对话框弹出，或者作为 MainWindow 的初始状态（使用 `QStackedWidget` 切换）。*
+    *   **顶部 (Top Area)**:
+        *   `QLabel` (lblAvatar): 用户头像.
+        *   `QLabel` (lblNickname): 用户昵称.
+        *   `QLineEdit` (txtSearch): 搜索好友/群组.
+    *   **中部 (Tab Content)**:
+        *   `QTabWidget` 或 `QToolBox`:
+            *   **Tab 1: 好友列表 (Contacts)**: 使用 `QTreeWidget` 实现分组显示 (如 "我的好友", "黑名单").
+            *   **Tab 2: 群组列表 (Groups)**: 显示已加入的群聊.
+            *   **Tab 3: 最近会话 (Recent)**: 显示最近聊天的对象.
+    *   **底部 (Bottom Toolbar)**:
+        *   `QPushButton` (btnAdd): 打开 "查找/添加好友" 窗口.
+        *   `QPushButton` (btnCreateGroup): 打开 "创建群组" 窗口.
+        *   `QPushButton` (btnSettings): 系统设置.
 
-#### 页面 2：聊天主窗口 (MainWindow)
-*   **功能目标**: 发送/接收消息，查看在线用户。
+#### 页面 3：聊天窗口 (ChatWindow)
+*   **功能**: 核心聊天交互 (支持单聊和群聊).
+*   **交互逻辑**: 双击主界面的好友或群组时弹出此窗口。
 *   **控件布局**:
-    *   **左侧 (聊天区)**:
-        *   `QTextBrowser` 或 `QListWidget`: 显示历史聊天记录 (只读)。建议使用 `QTextBrowser` 支持简单的富文本（区分自己和他人的消息颜色）。
-        *   `QLineEdit`: 消息输入框。
-        *   `QPushButton`: "发送" 按钮。
-    *   **右侧 (用户列表区)**:
-        *   `QLabel`: 标题 "在线用户"。
-        *   `QListWidget`: 显示当前在线的所有用户昵称。
-    *   **底部 (可选日志区)**:
-        *   `QTextEdit`: (只读) 显示底层网络日志（如 "Connected to host", "JSON received..."），便于调试。
+    *   **标题栏**: 显示聊天对象名称 (用户昵称 或 群名).
+    *   **消息展示区 (Center)**:
+        *   `QListWidget` 或 `QWebEngineView`: 用于显示消息气泡.
+        *   **左侧气泡**: 对方发送的消息.
+        *   **右侧气泡**: 自己发送的消息.
+        *   **时间戳**: 间隔显示.
+    *   **输入工具栏 (Toolbar)**:
+        *   `QPushButton`: 表情、图片、文件发送按钮 (扩展功能).
+    *   **输入区 (Bottom)**:
+        *   `QTextEdit`: 多行文本输入.
+        *   `QPushButton` (btnSend): "发送" (支持 Ctrl+Enter).
+
+#### 页面 4：查找与添加 (SearchDialog)
+*   **功能**: 搜索并添加好友.
+*   **控件**:
+        *   `QLineEdit`: 输入账号/昵称关键词.
+        *   `QPushButton`: "搜索".
+        *   `QListWidget`: 显示搜索结果列表 (包含 "添加" 按钮).
+
+### 7.2 服务器端 (chatServer)
+
+服务端作为管理控制台，重点在于数据的可视化监控。
+
+#### 页面：服务器管理控制台 (ServerMainWindow)
+*   **Tab 1: 运行监控 (Monitor)**
+    *   `QTextBrowser`: 实时系统日志 (连接、断开、错误).
+    *   `QLCDNumber` 或 `QLabel`: 当前在线人数、今日消息总数.
+    *   `QPushButton`: 启动/停止服务.
+*   **Tab 2: 用户管理 (UserManager)**
+    *   `QTableWidget`: 显示所有注册用户表 (ID, 账号, 昵称, 注册时间, 是否在线).
+    *   **操作**: 支持强制下线、封禁账号 (扩展功能).
+*   **Tab 3: 系统配置 (Config)**
+    *   `QFormLayout`: 设置监听端口、最大连接数、数据库路径等.
 
