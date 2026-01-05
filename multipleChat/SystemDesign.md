@@ -241,11 +241,12 @@
 #### 页面：服务器管理控制台 (ServerMainWindow)
 *   **Tab 1: 运行监控 (Monitor)**
     *   `QTextBrowser`: 实时系统日志 (连接、断开、错误).
-    *   `QLCDNumber` 或 `QLabel`: 当前在线人数、今日消息总数.
-    *   `QPushButton`: 启动/停止服务.
+    *   `QLCDNumber` 或 `QLabel`: 当前在线人数.
+    *   **控制区**:
+        *   `QLineEdit`: 监听端口 (默认 12345).
+        *   `QPushButton`: 启动/停止服务.
 *   **Tab 2: 用户管理 (UserManager)**
     *   `QTableWidget`: 显示所有注册用户表 (ID, 账号, 昵称, 注册时间, 是否在线).
-    *   **操作**: 支持强制下线、封禁账号 (扩展功能).
-*   **Tab 3: 系统配置 (Config)**
-    *   `QFormLayout`: 设置监听端口、最大连接数、数据库路径等.
+    *   **操作**: 支持强制下线.
+*   **配置说明**: 最大连接数、数据库路径等参数将在代码中作为常量固定，不再提供界面配置。
 

@@ -6,146 +6,163 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>498</width>
-    <height>317</height>
+    <width>494</width>
+    <height>302</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>MultipleChat Server Console</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>6</x>
-      <y>6</y>
-      <width>180</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>20</pointsize>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>运行监控、系统配置</string>
-    </property>
-   </widget>
-   <widget class="QWidget" name="">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>40</y>
-      <width>211</width>
-      <height>261</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout_3">
-     <item>
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>实时系统日志</string>
-       </property>
+   <layout class="QVBoxLayout" name="verticalLayout_main">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tabMonitor">
+       <attribute name="title">
+        <string>运行监控</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_monitor">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_control">
+          <item>
+           <widget class="QLabel" name="label_port">
+            <property name="text">
+             <string>监听端口:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="txtPort">
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>12345</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnStartStop">
+            <property name="text">
+             <string>启动服务</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_online">
+            <property name="text">
+             <string>在线人数:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lcdOnline">
+            <property name="segmentStyle">
+             <enum>QLCDNumber::SegmentStyle::Flat</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_log">
+          <property name="title">
+           <string>系统日志</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_log">
+           <item>
+            <widget class="QTextBrowser" name="txtLog"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
       </widget>
-     </item>
-     <item>
-      <widget class="QTextBrowser" name="textBrowser"/>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout">
-         <item>
-          <widget class="QLabel" name="label_3">
+      <widget class="QWidget" name="tabUsers">
+       <attribute name="title">
+        <string>用户管理</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_users">
+        <item>
+         <widget class="QTableWidget" name="tblUsers">
+          <property name="columnCount">
+           <number>5</number>
+          </property>
+          <column>
            <property name="text">
-            <string>当前在线人数</string>
+            <string>ID</string>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLCDNumber" name="onlineAccount"/>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Orientation::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
-         <item>
-          <widget class="QLabel" name="label_4">
+          </column>
+          <column>
            <property name="text">
-            <string>发送总消息数</string>
+            <string>账号</string>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLCDNumber" name="totalMesNum"/>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="">
-    <property name="geometry">
-     <rect>
-      <x>230</x>
-      <y>40</y>
-      <width>260</width>
-      <height>254</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout_5">
-     <item>
-      <layout class="QVBoxLayout" name="verticalLayout_4">
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <item>
-          <widget class="QLabel" name="label_5">
+          </column>
+          <column>
            <property name="text">
-            <string>设置监听端口：</string>
+            <string>昵称</string>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="setMonitor"/>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="QTableWidget" name="userInfo"/>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <widget class="QPushButton" name="stopMonitor">
-       <property name="font">
-        <font>
-         <pointsize>15</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>停止监控</string>
-       </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>登录时间</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>状态</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_user_actions">
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnKick">
+            <property name="text">
+             <string>强制下线 </string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
-     </item>
-    </layout>
-   </widget>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>
