@@ -52,7 +52,7 @@ void MainWindow::on_btnStartStop_clicked()
     } else {
         // 停止服务器
         // TODO: 这里将调用 ChatServer 类的 close 方法
-        
+
         m_isServerRunning = false;
         ui->btnStartStop->setText("启动服务 (Start)");
         ui->txtPort->setEnabled(true);
@@ -70,7 +70,7 @@ void MainWindow::on_btnKick_clicked()
     }
 
     QString account = ui->tblUsers->item(currentRow, 1)->text(); // 假设第2列是账号
-    
+
     // TODO: 调用服务器逻辑强制断开该用户连接
     logMessage(QString("管理员强制下线用户: %1").arg(account));
 }
