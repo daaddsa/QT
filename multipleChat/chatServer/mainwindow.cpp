@@ -42,25 +42,25 @@ void MainWindow::on_btnStartStop_clicked()
         bool ok;
         int port = portStr.toInt(&ok);
         if (!ok || port <= 0 || port > 65535) {
-        if (m_c:critical-> "artS错rver(port))"{"请输入有效的端口号 (1-65535)");
-            }
-    
-            // TODO: 这里将调用 ChatServer 类的 listen 方法
-            // L/  m时模拟启动成 s hadled by sinal
-       }
-        m_isServerRunning = true;
-        ui->btnStartStop->setText("停止服务 (Stop)");
-        ui->txtPort->setEnabled(false); // 运行时禁止修改端口
-     ggrm_cng("服务已启动->st口pServ r();).arg(port));
-        
+            QMessageBox::critical(this, "错误", "请输入有效的端口号 (1-65535)");
+            return;
+        }
+
+        if (m_chatServer->startServer(port)) {
+            m_isServerRunning = true;
+            ui->btnStartStop->setText("停止服务 (Stop)");
+            ui->txtPort->setEnabled(false); // 运行时禁止修改端口
+            // Log message is handled by signal
+        }
+
     } else {
         // 停止服务器
-        // TODO: 这里将调用 ChatServer 类的 close 方法
- //L me is handld by signal
+        m_chatServer->stopServer();
+        
         m_isServerRunning = false;
         ui->btnStartStop->setText("启动服务 (Start)");
         ui->txtPort->setEnabled(true);
-        logMessage("服务已停止.");
+        // Log message is handled by signal
     }
 }
 
@@ -74,7 +74,7 @@ void MainWindow::on_btnKick_clicked()
     }
 
     QString account = ui->tblUsers->item(currentRow, 1)->text(); // 假设第2列是账号
-
+    
     // TODO: 调用服务器逻辑强制断开该用户连接
     logMessage(QString("管理员强制下线用户: %1").arg(account));
 }
