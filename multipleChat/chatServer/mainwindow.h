@@ -26,6 +26,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    ChatServer *m_chatServer;
     bool m_isServerRunning; // 记录服务器运行状态
 };
 #endif // MAINWINDOW_H
