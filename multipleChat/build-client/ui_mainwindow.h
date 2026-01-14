@@ -87,7 +87,7 @@ public:
         horizontalLayout_root->setObjectName("horizontalLayout_root");
         splitterMain = new QSplitter(centralwidget);
         splitterMain->setObjectName("splitterMain");
-        splitterMain->setOrientation(Qt::Horizontal);
+        splitterMain->setOrientation(Qt::Orientation::Horizontal);
         widgetSidebar = new QWidget(splitterMain);
         widgetSidebar->setObjectName("widgetSidebar");
         widgetSidebar->setMinimumSize(QSize(280, 0));
@@ -96,14 +96,14 @@ public:
         verticalLayout_sidebar->setContentsMargins(0, 0, 0, 0);
         frameProfile = new QFrame(widgetSidebar);
         frameProfile->setObjectName("frameProfile");
-        frameProfile->setFrameShape(QFrame::StyledPanel);
+        frameProfile->setFrameShape(QFrame::Shape::StyledPanel);
         horizontalLayout_profile = new QHBoxLayout(frameProfile);
         horizontalLayout_profile->setObjectName("horizontalLayout_profile");
         lblAvatar = new QLabel(frameProfile);
         lblAvatar->setObjectName("lblAvatar");
         lblAvatar->setMinimumSize(QSize(40, 40));
         lblAvatar->setMaximumSize(QSize(40, 40));
-        lblAvatar->setAlignment(Qt::AlignCenter);
+        lblAvatar->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         horizontalLayout_profile->addWidget(lblAvatar);
 
@@ -145,6 +145,9 @@ public:
         verticalLayout_contacts = new QVBoxLayout(tabContacts);
         verticalLayout_contacts->setObjectName("verticalLayout_contacts");
         treeContacts = new QTreeWidget(tabContacts);
+        QTreeWidgetItem *__qtreewidgetitem = new QTreeWidgetItem();
+        __qtreewidgetitem->setText(0, QString::fromUtf8("1"));
+        treeContacts->setHeaderItem(__qtreewidgetitem);
         treeContacts->setObjectName("treeContacts");
         treeContacts->setHeaderHidden(true);
 

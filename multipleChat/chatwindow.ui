@@ -6,13 +6,211 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>720</width>
+    <height>560</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>对话</string>
   </property>
+  <layout class="QVBoxLayout" name="verticalLayout_root">
+   <item>
+    <widget class="QFrame" name="frameHeader">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_header">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_headerText">
+        <item>
+         <widget class="QLabel" name="lblChatTitle">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>群聊</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lblChatSubtitle">
+          <property name="text">
+           <string>在线：0</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_header">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QToolButton" name="btnHeaderInfo">
+        <property name="text">
+         <string>信息</string>
+        </property>
+        <property name="toolTip">
+         <string>查看会话信息</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="btnHeaderClose">
+        <property name="text">
+         <string>关闭</string>
+        </property>
+        <property name="toolTip">
+         <string>关闭对话窗口</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QSplitter" name="splitterChat">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <widget class="QWidget" name="widgetChat">
+      <layout class="QVBoxLayout" name="verticalLayout_chat">
+       <item>
+        <widget class="QTextBrowser" name="txtMessages">
+         <property name="placeholderText">
+          <string>消息记录</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frameComposer">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_composer">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_tools">
+            <item>
+             <widget class="QToolButton" name="btnEmoji">
+              <property name="text">
+               <string>表情</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btnImage">
+              <property name="text">
+               <string>图片</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btnFile">
+              <property name="text">
+               <string>文件</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_tools">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QLabel" name="lblHint">
+              <property name="text">
+               <string>Ctrl+Enter 发送</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_input">
+            <item>
+             <widget class="QTextEdit" name="txtInput">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>90</height>
+               </size>
+              </property>
+              <property name="placeholderText">
+               <string>输入消息</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnSend">
+              <property name="minimumSize">
+               <size>
+                <width>90</width>
+                <height>90</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>发送</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="widgetParticipants">
+      <property name="minimumSize">
+       <size>
+        <width>220</width>
+        <height>0</height>
+       </size>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_participants">
+       <item>
+        <widget class="QLabel" name="lblParticipantsTitle">
+         <property name="font">
+          <font>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>成员</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QListWidget" name="listParticipants"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

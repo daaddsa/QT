@@ -2083,11 +2083,65 @@ debug/mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/QVariant \
 		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QApplication \
 		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qapplication.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QFrame \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qframe.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QGroupBox \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qgroupbox.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QHBoxLayout \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qboxlayout.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qlayout.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qlayoutitem.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qgridlayout.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QHeaderView \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qheaderview.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qabstractitemview.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		D:/Qt/6.9.2/mingw_64/include/QtCore/qabstractitemmodel.h \
+		D:/Qt/6.9.2/mingw_64/include/QtCore/qitemselectionmodel.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qstyleoption.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qabstractspinbox.h \
+		D:/Qt/6.9.2/mingw_64/include/QtGui/qvalidator.h \
+		D:/Qt/6.9.2/mingw_64/include/QtCore/qregularexpression.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qslider.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qabstractslider.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qstyle.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qtabbar.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qrubberband.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QLabel \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qlabel.h \
+		D:/Qt/6.9.2/mingw_64/include/QtGui/qpicture.h \
+		D:/Qt/6.9.2/mingw_64/include/QtGui/qtextdocument.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QLineEdit \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qlineedit.h \
+		D:/Qt/6.9.2/mingw_64/include/QtGui/qtextcursor.h \
+		D:/Qt/6.9.2/mingw_64/include/QtGui/qtextformat.h \
+		D:/Qt/6.9.2/mingw_64/include/QtGui/qpen.h \
+		D:/Qt/6.9.2/mingw_64/include/QtGui/qtextoption.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QListWidget \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qlistwidget.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qlistview.h \
 		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QMenuBar \
 		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qmenubar.h \
 		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qmenu.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QPushButton \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qpushbutton.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qabstractbutton.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QSpacerItem \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QSplitter \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qsplitter.h \
 		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QStatusBar \
 		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qstatusbar.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QTabWidget \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QTextBrowser \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qtextbrowser.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qtextedit.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QTextEdit \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QTreeWidget \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qtreewidget.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qtreeview.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qtreewidgetitemiterator.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QVBoxLayout \
 		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QWidget \
 		../login.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/QCoreApplication \
@@ -2099,7 +2153,6 @@ debug/mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/qjsonvalue.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/qcborvalue.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/qcborcommon.h \
-		D:/Qt/6.9.2/mingw_64/include/QtCore/qregularexpression.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/quuid.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/qjsondocument.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/qjsonparseerror.h \
