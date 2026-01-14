@@ -2508,6 +2508,30 @@ release/signup.o: ../signup.cpp ../signup.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/QVariant \
 		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QApplication \
 		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qapplication.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QFormLayout \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qformlayout.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QLayout \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qlayout.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qlayoutitem.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qboxlayout.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qgridlayout.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QHBoxLayout \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QLabel \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qlabel.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qframe.h \
+		D:/Qt/6.9.2/mingw_64/include/QtGui/qpicture.h \
+		D:/Qt/6.9.2/mingw_64/include/QtGui/qtextdocument.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QLineEdit \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qlineedit.h \
+		D:/Qt/6.9.2/mingw_64/include/QtGui/qtextcursor.h \
+		D:/Qt/6.9.2/mingw_64/include/QtGui/qtextformat.h \
+		D:/Qt/6.9.2/mingw_64/include/QtGui/qpen.h \
+		D:/Qt/6.9.2/mingw_64/include/QtGui/qtextoption.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QPushButton \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qpushbutton.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qabstractbutton.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QSpacerItem \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QVBoxLayout \
 		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QMessageBox \
 		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qmessagebox.h \
 		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qdialog.h \
