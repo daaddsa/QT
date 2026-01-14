@@ -122,6 +122,7 @@ void login::onReadyRead()
             if (success) {
                 QMessageBox::information(this, "成功", "登录成功！");
                 m_socket->setParent(nullptr);
+                m_socket->setProperty("username", ui->txtUsername->text().trimmed());
                 emit loginSuccess(m_socket); 
                 this->close(); 
                 return;

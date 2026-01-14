@@ -21,8 +21,18 @@ public:
 public slots:
     void onLoginSuccess(QTcpSocket *socket);
 
+private slots:
+    void onSocketReadyRead();
+    void onSendClicked();
+
+private:
+    void appendLog(const QString &msg);
+    void appendChat(const QString &sender, const QString &text);
+    void refreshUserList(const QStringList &users);
+
 private:
     Ui::MainWindow *ui;
     QTcpSocket *m_socket;
+    QString m_username;
 };
 #endif // MAINWINDOW_H
