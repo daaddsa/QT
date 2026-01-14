@@ -1153,6 +1153,13 @@ debug/moc_signup.cpp: ../signup.h \
 		D:/Qt/6.9.2/mingw_64/include/QtGui/qinputmethod.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/qlocale.h \
 		D:/Qt/6.9.2/mingw_64/include/QtGui/qguiapplication_platform.h \
+		D:/Qt/6.9.2/mingw_64/include/QtNetwork/QTcpSocket \
+		D:/Qt/6.9.2/mingw_64/include/QtNetwork/qtcpsocket.h \
+		D:/Qt/6.9.2/mingw_64/include/QtNetwork/qtnetworkglobal.h \
+		D:/Qt/6.9.2/mingw_64/include/QtNetwork/qtnetwork-config.h \
+		D:/Qt/6.9.2/mingw_64/include/QtNetwork/qtnetworkexports.h \
+		D:/Qt/6.9.2/mingw_64/include/QtNetwork/qabstractsocket.h \
+		D:/Qt/6.9.2/mingw_64/include/QtNetwork/qhostaddress.h \
 		debug/moc_predefs.h \
 		D:/Qt/6.9.2/mingw_64/bin/moc.exe
 	D:\Qt\6.9.2\mingw_64\bin\moc.exe $(DEFINES) --include D:/Users/Lenovo/Desktop/Library/QTapplication/experiment3/multipleChat/build-client/debug/moc_predefs.h -ID:/Qt/6.9.2/mingw_64/mkspecs/win32-g++ -ID:/Users/Lenovo/Desktop/Library/QTapplication/experiment3/multipleChat -ID:/Qt/6.9.2/mingw_64/include -ID:/Qt/6.9.2/mingw_64/include/QtWidgets -ID:/Qt/6.9.2/mingw_64/include/QtGui -ID:/Qt/6.9.2/mingw_64/include/QtNetwork -ID:/Qt/6.9.2/mingw_64/include/QtCore -I. -ID:/QT/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -ID:/QT/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -ID:/QT/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -ID:/QT/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -ID:/QT/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -ID:/QT/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\signup.h -o debug\moc_signup.cpp
@@ -1632,6 +1639,7 @@ debug/login.o: ../login.cpp ../login.h \
 		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qabstractbutton.h \
 		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QSpacerItem \
 		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QVBoxLayout \
+		../signup.h \
 		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QMessageBox \
 		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qmessagebox.h \
 		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qdialog.h \
@@ -2489,10 +2497,33 @@ debug/signup.o: ../signup.cpp ../signup.h \
 		D:/Qt/6.9.2/mingw_64/include/QtGui/qinputmethod.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/qlocale.h \
 		D:/Qt/6.9.2/mingw_64/include/QtGui/qguiapplication_platform.h \
+		D:/Qt/6.9.2/mingw_64/include/QtNetwork/QTcpSocket \
+		D:/Qt/6.9.2/mingw_64/include/QtNetwork/qtcpsocket.h \
+		D:/Qt/6.9.2/mingw_64/include/QtNetwork/qtnetworkglobal.h \
+		D:/Qt/6.9.2/mingw_64/include/QtNetwork/qtnetwork-config.h \
+		D:/Qt/6.9.2/mingw_64/include/QtNetwork/qtnetworkexports.h \
+		D:/Qt/6.9.2/mingw_64/include/QtNetwork/qabstractsocket.h \
+		D:/Qt/6.9.2/mingw_64/include/QtNetwork/qhostaddress.h \
 		../ui_signup.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/QVariant \
 		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QApplication \
-		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qapplication.h
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qapplication.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/QMessageBox \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qmessagebox.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qdialog.h \
+		D:/Qt/6.9.2/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
+		D:/Qt/6.9.2/mingw_64/include/QtCore/QJsonDocument \
+		D:/Qt/6.9.2/mingw_64/include/QtCore/qjsondocument.h \
+		D:/Qt/6.9.2/mingw_64/include/QtCore/qjsonparseerror.h \
+		D:/Qt/6.9.2/mingw_64/include/QtCore/qjsonvalue.h \
+		D:/Qt/6.9.2/mingw_64/include/QtCore/qcborvalue.h \
+		D:/Qt/6.9.2/mingw_64/include/QtCore/qcborcommon.h \
+		D:/Qt/6.9.2/mingw_64/include/QtCore/qdatetime.h \
+		D:/Qt/6.9.2/mingw_64/include/QtCore/qcalendar.h \
+		D:/Qt/6.9.2/mingw_64/include/QtCore/qregularexpression.h \
+		D:/Qt/6.9.2/mingw_64/include/QtCore/quuid.h \
+		D:/Qt/6.9.2/mingw_64/include/QtCore/QJsonObject \
+		D:/Qt/6.9.2/mingw_64/include/QtCore/qjsonobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\signup.o ..\signup.cpp
 
 debug/moc_chatwindow.o: debug/moc_chatwindow.cpp 

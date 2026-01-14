@@ -1,5 +1,6 @@
 #include "login.h"
 #include "ui_login.h"
+#include "signup.h"
 #include <QMessageBox>
 #include <QHostAddress>
 #include <QJsonObject>
@@ -50,6 +51,35 @@ void login::on_btnLogin_clicked()
 void login::on_btnCancel_clicked()
 {
     this->close();
+}
+
+void login::on_btnToRegister_clicked()
+{
+    const QString ip = ui->txtServerIP->text().trimmed();
+    bool ok = false;
+    const int port = ui->txtPort->text().toInt(&ok);
+    if (ip.isEmpty() || !ok || port <= 0 || port > 65535) {
+        QMessageBox::warning(this, "提示", "请先填写有效的服务器IP和端口");
+        return;
+    }
+
+    auto *signUpWindow = new signUp(nullptr);
+    signUpWindow->setAttribute(Qt::WA_DeleteOnClose);
+    signUpWindow->setServerEndpoint(ip, port);
+
+    connect(signUpWindow, &signUp::backToLogin, this, [this]() {
+        this->show();
+    });
+    connect(signUpWindow, &signUp::signUpSuccess, this, [this](const QString &username) {
+        ui->txtUsername->setText(username);
+        this->show();
+    });
+    connect(signUpWindow, &QObject::destroyed, this, [this]() {
+        this->show();
+    });
+
+    this->hide();
+    signUpWindow->show();
 }
 
 void login::onConnected()

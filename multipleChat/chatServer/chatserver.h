@@ -3,6 +3,7 @@
 
 #include <QTcpServer>
 #include <QList>
+#include <QHash>
 #include "serverworker.h"
 
 class ChatServer : public QTcpServer
@@ -25,7 +26,12 @@ private slots:
     void userDisconnected(ServerWorker *sender);
 
 private:
+    struct RegisteredUser {
+        QString nickname;
+        QString password;
+    };
     QList<ServerWorker *> m_clients;
+    QHash<QString, RegisteredUser> m_registeredUsers;
 };
 
 #endif // CHATSERVER_H

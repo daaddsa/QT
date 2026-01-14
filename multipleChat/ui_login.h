@@ -36,6 +36,7 @@ public:
     QLineEdit *txtUsername;
     QSpacerItem *verticalSpacer_2;
     QPushButton *btnLogin;
+    QPushButton *btnToRegister;
     QPushButton *btnCancel;
 
     void setupUi(QWidget *login)
@@ -103,6 +104,11 @@ public:
 
         verticalLayout->addWidget(btnLogin);
 
+        btnToRegister = new QPushButton(login);
+        btnToRegister->setObjectName("btnToRegister");
+
+        verticalLayout->addWidget(btnToRegister);
+
         btnCancel = new QPushButton(login);
         btnCancel->setObjectName("btnCancel");
 
@@ -125,6 +131,7 @@ public:
         label_user->setText(QCoreApplication::translate("login", "\347\224\250\346\210\267\345\220\215:", nullptr));
         txtUsername->setPlaceholderText(QCoreApplication::translate("login", "\350\257\267\350\276\223\345\205\245\346\202\250\347\232\204\346\230\265\347\247\260", nullptr));
         btnLogin->setText(QCoreApplication::translate("login", "\347\231\273 \345\275\225", nullptr));
+        btnToRegister->setText(QCoreApplication::translate("login", "\346\263\250\345\206\214\350\264\246\345\217\267", nullptr));
         btnCancel->setText(QCoreApplication::translate("login", "\345\217\226 \346\266\210", nullptr));
     } // retranslateUi
 

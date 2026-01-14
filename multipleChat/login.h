@@ -22,6 +22,7 @@ signals:
 private slots:
     void on_btnLogin_clicked();
     void on_btnCancel_clicked();
+    void on_btnToRegister_clicked();
     void onConnected();
     void onErrorOccurred(QAbstractSocket::SocketError socketError);
     void onReadyRead();

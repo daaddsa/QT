@@ -45,6 +45,7 @@ template <> constexpr inline auto login::qt_create_metaobjectdata<qt_meta_tag_ZN
         "socket",
         "on_btnLogin_clicked",
         "on_btnCancel_clicked",
+        "on_btnToRegister_clicked",
         "onConnected",
         "onErrorOccurred",
         "QAbstractSocket::SocketError",
@@ -61,14 +62,16 @@ template <> constexpr inline auto login::qt_create_metaobjectdata<qt_meta_tag_ZN
         QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_btnCancel_clicked'
         QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'onConnected'
+        // Slot 'on_btnToRegister_clicked'
         QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'onConnected'
+        QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'onErrorOccurred'
-        QtMocHelpers::SlotData<void(QAbstractSocket::SocketError)>(8, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { 0x80000000 | 9, 10 },
+        QtMocHelpers::SlotData<void(QAbstractSocket::SocketError)>(9, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 10, 11 },
         }}),
         // Slot 'onReadyRead'
-        QtMocHelpers::SlotData<void()>(11, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(12, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -95,9 +98,10 @@ void login::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
         case 0: _t->loginSuccess((*reinterpret_cast< std::add_pointer_t<QTcpSocket*>>(_a[1]))); break;
         case 1: _t->on_btnLogin_clicked(); break;
         case 2: _t->on_btnCancel_clicked(); break;
-        case 3: _t->onConnected(); break;
-        case 4: _t->onErrorOccurred((*reinterpret_cast< std::add_pointer_t<QAbstractSocket::SocketError>>(_a[1]))); break;
-        case 5: _t->onReadyRead(); break;
+        case 3: _t->on_btnToRegister_clicked(); break;
+        case 4: _t->onConnected(); break;
+        case 5: _t->onErrorOccurred((*reinterpret_cast< std::add_pointer_t<QAbstractSocket::SocketError>>(_a[1]))); break;
+        case 6: _t->onReadyRead(); break;
         default: ;
         }
     }
@@ -111,7 +115,7 @@ void login::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
                 *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QTcpSocket* >(); break;
             }
             break;
-        case 4:
+        case 5:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
             case 0:
@@ -145,14 +149,14 @@ int login::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 7;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 7;
     }
     return _id;
 }

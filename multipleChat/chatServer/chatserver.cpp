@@ -66,7 +66,35 @@ void ChatServer::jsonReceived(const QJsonObject &jsonDoc, ServerWorker *sender)
 
     const QString type = typeVal.toString();
 
-    if (type == "login") {
+    if (type == "signup") {
+        const QString account = jsonDoc.value("account").toString().trimmed();
+        const QString nickname = jsonDoc.value("nickname").toString().trimmed();
+        const QString password = jsonDoc.value("password").toString();
+
+        QJsonObject resp;
+        resp["type"] = "signup_response";
+
+        if (account.isEmpty() || nickname.isEmpty() || password.isEmpty()) {
+            resp["success"] = false;
+            resp["message"] = "账号/昵称/密码不能为空";
+            sender->sendJson(resp);
+            return;
+        }
+        if (m_registeredUsers.contains(account)) {
+            resp["success"] = false;
+            resp["message"] = "账号已存在";
+            sender->sendJson(resp);
+            return;
+        }
+
+        RegisteredUser u{nickname, password};
+        m_registeredUsers.insert(account, u);
+
+        resp["success"] = true;
+        sender->sendJson(resp);
+        emit logMessage(QString("注册成功: account=%1 nickname=%2").arg(account, nickname));
+        return;
+    } else if (type == "login") {
         const QString username = jsonDoc.value("username").toString();
         if (username.isEmpty()) {
              QJsonObject response;

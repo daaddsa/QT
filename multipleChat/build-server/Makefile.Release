@@ -327,6 +327,7 @@ release/moc_mainwindow.cpp: ../chatServer/mainwindow.h \
 		D:/Qt/6.9.2/mingw_64/include/QtNetwork/qtnetworkexports.h \
 		D:/Qt/6.9.2/mingw_64/include/QtNetwork/qabstractsocket.h \
 		D:/Qt/6.9.2/mingw_64/include/QtNetwork/qhostaddress.h \
+		D:/Qt/6.9.2/mingw_64/include/QtCore/QHash \
 		../chatServer/serverworker.h \
 		D:/Qt/6.9.2/mingw_64/include/QtNetwork/QTcpSocket \
 		D:/Qt/6.9.2/mingw_64/include/QtNetwork/qtcpsocket.h \
@@ -468,6 +469,8 @@ release/moc_chatserver.cpp: ../chatServer/chatserver.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/qspan.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/q20iterator.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/QList \
+		D:/Qt/6.9.2/mingw_64/include/QtCore/QHash \
+		D:/Qt/6.9.2/mingw_64/include/QtCore/qhash.h \
 		../chatServer/serverworker.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/QObject \
 		D:/Qt/6.9.2/mingw_64/include/QtNetwork/QTcpSocket \
@@ -481,7 +484,6 @@ release/moc_chatserver.cpp: ../chatServer/chatserver.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/qmap.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/qshareddata_impl.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/qset.h \
-		D:/Qt/6.9.2/mingw_64/include/QtCore/qhash.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/qvarlengtharray.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/q23utility.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/q20utility.h \
@@ -889,6 +891,7 @@ release/main.o: ../chatServer/main.cpp ../chatServer/mainwindow.h \
 		D:/Qt/6.9.2/mingw_64/include/QtNetwork/qtnetworkexports.h \
 		D:/Qt/6.9.2/mingw_64/include/QtNetwork/qabstractsocket.h \
 		D:/Qt/6.9.2/mingw_64/include/QtNetwork/qhostaddress.h \
+		D:/Qt/6.9.2/mingw_64/include/QtCore/QHash \
 		../chatServer/serverworker.h \
 		D:/Qt/6.9.2/mingw_64/include/QtNetwork/QTcpSocket \
 		D:/Qt/6.9.2/mingw_64/include/QtNetwork/qtcpsocket.h \
@@ -1119,6 +1122,7 @@ release/mainwindow.o: ../chatServer/mainwindow.cpp ../chatServer/mainwindow.h \
 		D:/Qt/6.9.2/mingw_64/include/QtNetwork/qtnetworkexports.h \
 		D:/Qt/6.9.2/mingw_64/include/QtNetwork/qabstractsocket.h \
 		D:/Qt/6.9.2/mingw_64/include/QtNetwork/qhostaddress.h \
+		D:/Qt/6.9.2/mingw_64/include/QtCore/QHash \
 		../chatServer/serverworker.h \
 		D:/Qt/6.9.2/mingw_64/include/QtNetwork/QTcpSocket \
 		D:/Qt/6.9.2/mingw_64/include/QtNetwork/qtcpsocket.h \
@@ -1315,6 +1319,8 @@ release/chatserver.o: ../chatServer/chatserver.cpp ../chatServer/chatserver.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/qspan.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/q20iterator.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/QList \
+		D:/Qt/6.9.2/mingw_64/include/QtCore/QHash \
+		D:/Qt/6.9.2/mingw_64/include/QtCore/qhash.h \
 		../chatServer/serverworker.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/QObject \
 		D:/Qt/6.9.2/mingw_64/include/QtNetwork/QTcpSocket \
@@ -1328,7 +1334,6 @@ release/chatserver.o: ../chatServer/chatserver.cpp ../chatServer/chatserver.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/qmap.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/qshareddata_impl.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/qset.h \
-		D:/Qt/6.9.2/mingw_64/include/QtCore/qhash.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/qvarlengtharray.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/q23utility.h \
 		D:/Qt/6.9.2/mingw_64/include/QtCore/q20utility.h \
