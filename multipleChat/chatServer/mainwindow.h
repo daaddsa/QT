@@ -20,6 +20,9 @@ public:
 
     // 用于在日志框中追加信息
     void logMessage(const QString &msg);
+    bool startServer(int port);
+    void stopServer();
+    bool isServerRunning() const;
 
 private slots:
     void on_btnStartStop_clicked();

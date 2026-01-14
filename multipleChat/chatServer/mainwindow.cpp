@@ -28,6 +28,34 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+bool MainWindow::startServer(int port)
+{
+    if (m_isServerRunning) return true;
+    if (port <= 0 || port > 65535) return false;
+
+    ui->txtPort->setText(QString::number(port));
+    if (!m_chatServer->startServer(port)) return false;
+
+    m_isServerRunning = true;
+    ui->btnStartStop->setText("停止服务 (Stop)");
+    ui->txtPort->setEnabled(false);
+    return true;
+}
+
+void MainWindow::stopServer()
+{
+    if (!m_isServerRunning) return;
+    m_chatServer->stopServer();
+    m_isServerRunning = false;
+    ui->btnStartStop->setText("启动服务 (Start)");
+    ui->txtPort->setEnabled(true);
+}
+
+bool MainWindow::isServerRunning() const
+{
+    return m_isServerRunning;
+}
+
 void MainWindow::logMessage(const QString &msg)
 {
     QString timestamp = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
@@ -46,21 +74,10 @@ void MainWindow::on_btnStartStop_clicked()
             return;
         }
 
-        if (m_chatServer->startServer(port)) {
-            m_isServerRunning = true;
-            ui->btnStartStop->setText("停止服务 (Stop)");
-            ui->txtPort->setEnabled(false); // 运行时禁止修改端口
-            // Log message is handled by signal
-        }
+        if (!startServer(port)) return;
 
     } else {
-        // 停止服务器
-        m_chatServer->stopServer();
-        
-        m_isServerRunning = false;
-        ui->btnStartStop->setText("启动服务 (Start)");
-        ui->txtPort->setEnabled(true);
-        // Log message is handled by signal
+        stopServer();
     }
 }
 

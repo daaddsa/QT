@@ -11,11 +11,13 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    chatserver.cpp
+    chatserver.cpp \
+    serverworker.cpp
 
 HEADERS += \
     mainwindow.h \
-    chatserver.h
+    chatserver.h \
+    serverworker.h
 
 FORMS += \
     mainwindow.ui
@@ -24,3 +26,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DESTDIR = $$PWD/../bin
+TARGET = chatServer

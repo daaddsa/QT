@@ -3,6 +3,7 @@
 
 #include <QTcpServer>
 #include <QList>
+#include "serverworker.h"
 
 class ChatServer : public QTcpServer
 {
@@ -11,6 +12,7 @@ public:
     explicit ChatServer(QObject *parent = nullptr);
     bool startServer(int port);
     void stopServer();
+    void broadcast(const QJsonObject &message, ServerWorker *exclude = nullptr);
 
 protected:
     void incomingConnection(qintptr socketDescriptor) override;
@@ -18,9 +20,12 @@ protected:
 signals:
     void logMessage(const QString &msg);
 
+private slots:
+    void jsonReceived(const QJsonObject &jsonDoc, ServerWorker *sender);
+    void userDisconnected(ServerWorker *sender);
+
 private:
-    // TODO: 这里将来会存放 ServerWorker 列表
-    // QList<ServerWorker *> m_clients;
+    QList<ServerWorker *> m_clients;
 };
 
 #endif // CHATSERVER_H

@@ -1,0 +1,11 @@
+release/chatwindow.o
+release/login.o
+release/main.o
+release/mainwindow.o
+release/searchdialog.o
+release/signup.o
+release/moc_chatwindow.o
+release/moc_login.o
+release/moc_mainwindow.o
+release/moc_searchdialog.o
+release/moc_signup.o

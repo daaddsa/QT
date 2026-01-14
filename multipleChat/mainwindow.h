@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTcpSocket>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -17,7 +18,11 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+public slots:
+    void onLoginSuccess(QTcpSocket *socket);
+
 private:
     Ui::MainWindow *ui;
+    QTcpSocket *m_socket;
 };
 #endif // MAINWINDOW_H

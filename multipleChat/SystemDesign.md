@@ -299,3 +299,51 @@
 2. 创建 ServerWorker ：在服务端建立处理客户端消息的工人类。
 3. 联调登录 ：验证数据包能否正确发送和解析。
 您想先开始写客户端的连接代码，还是先去服务端准备 ServerWorker ？
+
+---
+
+## 8. 问题排查记录
+
+### 8.1 Qt Creator 提示“未指定可执行文件/无法运行”
+
+**现象**
+- 点击运行时提示未指定可执行文件，或可执行文件路径为空/无效。
+
+**原因**
+- 运行配置与当前项目路径不一致（目录移动/重命名后，RunConfiguration 的 BuildKey 指向旧路径），导致 Qt Creator 无法解析出目标可执行文件。
+
+**解决**
+- 删除项目根目录下的 `multipleChat.pro.user`，重新用 Qt Creator 打开 `multipleChat.pro` 让其自动重建运行配置。
+
+### 8.2 命令行构建时 qmake/g++ 找不到或 g++ 报 cc1plus 缺失
+
+**现象**
+- `qmake` 不在 PATH：终端提示找不到 `qmake`。
+- `g++` 报错：`cannot execute 'cc1plus': CreateProcess: No such file or directory`。
+
+**原因**
+- Qt/MinGW 工具链未加入 PATH，导致 Makefile 内部调用的 `g++` 解析到系统中其他编译器或不完整的工具链。
+
+**解决**
+- 使用 Qt 安装目录下的工具链直接构建，并在构建命令中临时设置 PATH，使 `g++/gcc` 指向同一套 MinGW：
+  - Qt：`D:\QT\6.9.2\mingw_64\bin\qmake.exe`
+  - MinGW：`D:\QT\Tools\mingw1310_64\bin\mingw32-make.exe`
+
+### 8.3 独立运行 exe 缺少 Qt DLL/平台插件
+
+**现象**
+- 双击运行 exe 或从终端运行时启动失败（平台插件初始化失败等）。
+
+**原因**
+- 可执行文件所在目录缺少 Qt 运行时依赖（Qt6*.dll、platforms/qwindows.dll 等）。
+
+**解决**
+- 对生成的可执行文件执行 `windeployqt` 将依赖复制到同目录：
+  - `D:\QT\6.9.2\mingw_64\bin\windeployqt.exe --compiler-runtime --no-translations bin\multipleChat.exe`
+  - `D:\QT\6.9.2\mingw_64\bin\windeployqt.exe --compiler-runtime --no-translations bin\chatServer.exe`
+
+### 8.4 自动化冒烟测试入口
+
+为便于集成/回归验证，客户端与服务端支持参数：
+- `--smoke-test`：启动后约 200ms 自动退出。
+- `--no-login`（仅客户端）：跳过登录窗口，直接展示主窗口（配合 `--smoke-test` 使用）。
