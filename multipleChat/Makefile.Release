@@ -94,6 +94,7 @@ all: Makefile.Release  bin/multipleChat.exe
 
 bin/multipleChat.exe: D:/QT/6.9.2/mingw_64/lib/libQt6Widgets.a D:/QT/6.9.2/mingw_64/lib/libQt6Gui.a D:/QT/6.9.2/mingw_64/lib/libQt6Network.a D:/QT/6.9.2/mingw_64/lib/libQt6Core.a D:/QT/6.9.2/mingw_64/lib/libQt6EntryPoint.a ui_chatwindow.h ui_login.h ui_mainwindow.h ui_searchdialog.h ui_signup.h $(OBJECTS) 
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) @release\object_script.multipleChat.Release $(LIBS)
+	D:\QT\6.9.2\mingw_64\bin\windeployqt.exe D:\Users\Lenovo\Desktop\Library\QTapplication\experiment3\multipleChat\bin\
 
 qmake: FORCE
 	@$(QMAKE) -o Makefile.Release multipleChat.pro -spec win32-g++ "CONFIG+=debug"
@@ -330,6 +331,13 @@ release/moc_chatwindow.cpp: chatwindow.h \
 		D:/QT/6.9.2/mingw_64/include/QtGui/qinputmethod.h \
 		D:/QT/6.9.2/mingw_64/include/QtCore/qlocale.h \
 		D:/QT/6.9.2/mingw_64/include/QtGui/qguiapplication_platform.h \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/QTcpSocket \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/qtcpsocket.h \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/qtnetworkglobal.h \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/qtnetwork-config.h \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/qtnetworkexports.h \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/qabstractsocket.h \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/qhostaddress.h \
 		release/moc_predefs.h \
 		D:/QT/6.9.2/mingw_64/bin/moc.exe
 	D:\QT\6.9.2\mingw_64\bin\moc.exe $(DEFINES) --include D:/Users/Lenovo/Desktop/Library/QTapplication/experiment3/multipleChat/release/moc_predefs.h -ID:/QT/6.9.2/mingw_64/mkspecs/win32-g++ -ID:/Users/Lenovo/Desktop/Library/QTapplication/experiment3/multipleChat -ID:/QT/6.9.2/mingw_64/include -ID:/QT/6.9.2/mingw_64/include/QtWidgets -ID:/QT/6.9.2/mingw_64/include/QtGui -ID:/QT/6.9.2/mingw_64/include/QtNetwork -ID:/QT/6.9.2/mingw_64/include/QtCore -ID:/QT/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -ID:/QT/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -ID:/QT/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -ID:/QT/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -ID:/QT/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -ID:/QT/Tools/mingw1310_64/x86_64-w64-mingw32/include chatwindow.h -o release\moc_chatwindow.cpp
@@ -1154,6 +1162,13 @@ release/moc_signup.cpp: signup.h \
 		D:/QT/6.9.2/mingw_64/include/QtGui/qinputmethod.h \
 		D:/QT/6.9.2/mingw_64/include/QtCore/qlocale.h \
 		D:/QT/6.9.2/mingw_64/include/QtGui/qguiapplication_platform.h \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/QTcpSocket \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/qtcpsocket.h \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/qtnetworkglobal.h \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/qtnetwork-config.h \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/qtnetworkexports.h \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/qabstractsocket.h \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/qhostaddress.h \
 		release/moc_predefs.h \
 		D:/QT/6.9.2/mingw_64/bin/moc.exe
 	D:\QT\6.9.2\mingw_64\bin\moc.exe $(DEFINES) --include D:/Users/Lenovo/Desktop/Library/QTapplication/experiment3/multipleChat/release/moc_predefs.h -ID:/QT/6.9.2/mingw_64/mkspecs/win32-g++ -ID:/Users/Lenovo/Desktop/Library/QTapplication/experiment3/multipleChat -ID:/QT/6.9.2/mingw_64/include -ID:/QT/6.9.2/mingw_64/include/QtWidgets -ID:/QT/6.9.2/mingw_64/include/QtGui -ID:/QT/6.9.2/mingw_64/include/QtNetwork -ID:/QT/6.9.2/mingw_64/include/QtCore -ID:/QT/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -ID:/QT/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -ID:/QT/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -ID:/QT/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -ID:/QT/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -ID:/QT/Tools/mingw1310_64/x86_64-w64-mingw32/include signup.h -o release\moc_signup.cpp
@@ -1395,7 +1410,80 @@ release/chatwindow.o: chatwindow.cpp chatwindow.h \
 		D:/QT/6.9.2/mingw_64/include/QtGui/qinputmethod.h \
 		D:/QT/6.9.2/mingw_64/include/QtCore/qlocale.h \
 		D:/QT/6.9.2/mingw_64/include/QtGui/qguiapplication_platform.h \
-		ui_chatwindow.h
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/QTcpSocket \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/qtcpsocket.h \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/qtnetworkglobal.h \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/qtnetwork-config.h \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/qtnetworkexports.h \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/qabstractsocket.h \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/qhostaddress.h \
+		ui_chatwindow.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/QVariant \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QApplication \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qapplication.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QFrame \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qframe.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QHBoxLayout \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qboxlayout.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qlayout.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qlayoutitem.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qgridlayout.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QLabel \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qlabel.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qpicture.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qtextdocument.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QListWidget \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qlistwidget.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qlistview.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qabstractitemview.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qabstractitemmodel.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qitemselectionmodel.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qstyleoption.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qabstractspinbox.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qvalidator.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qregularexpression.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qslider.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qabstractslider.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qstyle.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qtabbar.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qtabwidget.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qrubberband.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QPushButton \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qpushbutton.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qabstractbutton.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QSpacerItem \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QSplitter \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qsplitter.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QTextBrowser \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qtextbrowser.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qtextedit.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qtextoption.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qtextcursor.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qtextformat.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qpen.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QTextEdit \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QToolButton \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qtoolbutton.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QVBoxLayout \
+		D:/QT/6.9.2/mingw_64/include/QtCore/QDateTime \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qdatetime.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qcalendar.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/QJsonArray \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qjsonarray.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qjsonvalue.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qcborvalue.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qcborcommon.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/quuid.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qjsondocument.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qjsonparseerror.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/QJsonDocument \
+		D:/QT/6.9.2/mingw_64/include/QtCore/QJsonObject \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qjsonobject.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/QJsonParseError \
+		D:/QT/6.9.2/mingw_64/include/QtGui/QShortcut \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qshortcut.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\chatwindow.o chatwindow.cpp
 
 release/login.o: login.cpp login.h \
@@ -1604,6 +1692,33 @@ release/login.o: login.cpp login.h \
 		D:/QT/6.9.2/mingw_64/include/QtNetwork/qabstractsocket.h \
 		D:/QT/6.9.2/mingw_64/include/QtNetwork/qhostaddress.h \
 		ui_login.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/QVariant \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QApplication \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qapplication.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QFormLayout \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qformlayout.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QLayout \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qlayout.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qlayoutitem.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qboxlayout.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qgridlayout.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QLabel \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qlabel.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qframe.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qpicture.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qtextdocument.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QLineEdit \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qlineedit.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qtextcursor.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qtextformat.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qpen.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qtextoption.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QPushButton \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qpushbutton.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qabstractbutton.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QSpacerItem \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QVBoxLayout \
+		signup.h \
 		D:/QT/6.9.2/mingw_64/include/QtWidgets/QMessageBox \
 		D:/QT/6.9.2/mingw_64/include/QtWidgets/qmessagebox.h \
 		D:/QT/6.9.2/mingw_64/include/QtWidgets/qdialog.h \
@@ -1832,6 +1947,22 @@ release/main.o: main.cpp mainwindow.h \
 		D:/QT/6.9.2/mingw_64/include/QtNetwork/qhostaddress.h \
 		D:/QT/6.9.2/mingw_64/include/QtWidgets/QApplication \
 		D:/QT/6.9.2/mingw_64/include/QtWidgets/qapplication.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/QCoreApplication \
+		D:/QT/6.9.2/mingw_64/include/QtCore/QJsonArray \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qjsonarray.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qjsonvalue.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qcborvalue.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qcborcommon.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qdatetime.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qcalendar.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qregularexpression.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/quuid.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qjsondocument.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qjsonparseerror.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/QJsonDocument \
+		D:/QT/6.9.2/mingw_64/include/QtCore/QJsonObject \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qjsonobject.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/QJsonParseError \
 		D:/QT/6.9.2/mingw_64/include/QtCore/QTimer \
 		D:/QT/6.9.2/mingw_64/include/QtCore/qtimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\main.o main.cpp
@@ -2044,9 +2175,89 @@ release/mainwindow.o: mainwindow.cpp mainwindow.h \
 		D:/QT/6.9.2/mingw_64/include/QtNetwork/qabstractsocket.h \
 		D:/QT/6.9.2/mingw_64/include/QtNetwork/qhostaddress.h \
 		ui_mainwindow.h \
-		login.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/QVariant \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QApplication \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qapplication.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QFrame \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qframe.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QGroupBox \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qgroupbox.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QHBoxLayout \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qboxlayout.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qlayout.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qlayoutitem.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qgridlayout.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QHeaderView \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qheaderview.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qabstractitemview.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qabstractitemmodel.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qitemselectionmodel.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qstyleoption.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qabstractspinbox.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qvalidator.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qregularexpression.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qslider.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qabstractslider.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qstyle.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qtabbar.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qrubberband.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QLabel \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qlabel.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qpicture.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qtextdocument.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QLineEdit \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qlineedit.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qtextcursor.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qtextformat.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qpen.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qtextoption.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QListWidget \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qlistwidget.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qlistview.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QMenuBar \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qmenubar.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qmenu.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QPushButton \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qpushbutton.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qabstractbutton.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QSpacerItem \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QSplitter \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qsplitter.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QStatusBar \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qstatusbar.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QTabWidget \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QTextBrowser \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qtextbrowser.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qtextedit.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QTextEdit \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QTreeWidget \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qtreewidget.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qtreeview.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qtreewidgetitemiterator.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QVBoxLayout \
 		D:/QT/6.9.2/mingw_64/include/QtWidgets/QWidget \
+		chatwindow.h \
+		login.h \
 		D:/QT/6.9.2/mingw_64/include/QtCore/QCoreApplication \
+		D:/QT/6.9.2/mingw_64/include/QtCore/QDateTime \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qdatetime.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qcalendar.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/QJsonArray \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qjsonarray.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qjsonvalue.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qcborvalue.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qcborcommon.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/quuid.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qjsondocument.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qjsonparseerror.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/QJsonDocument \
+		D:/QT/6.9.2/mingw_64/include/QtCore/QJsonObject \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qjsonobject.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/QJsonParseError \
+		D:/QT/6.9.2/mingw_64/include/QtGui/QShortcut \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qshortcut.h \
 		D:/QT/6.9.2/mingw_64/include/QtCore/QTimer \
 		D:/QT/6.9.2/mingw_64/include/QtCore/qtimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o mainwindow.cpp
@@ -2249,7 +2460,10 @@ release/searchdialog.o: searchdialog.cpp searchdialog.h \
 		D:/QT/6.9.2/mingw_64/include/QtGui/qinputmethod.h \
 		D:/QT/6.9.2/mingw_64/include/QtCore/qlocale.h \
 		D:/QT/6.9.2/mingw_64/include/QtGui/qguiapplication_platform.h \
-		ui_searchdialog.h
+		ui_searchdialog.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/QVariant \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QApplication \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\searchdialog.o searchdialog.cpp
 
 release/signup.o: signup.cpp signup.h \
@@ -2450,7 +2664,57 @@ release/signup.o: signup.cpp signup.h \
 		D:/QT/6.9.2/mingw_64/include/QtGui/qinputmethod.h \
 		D:/QT/6.9.2/mingw_64/include/QtCore/qlocale.h \
 		D:/QT/6.9.2/mingw_64/include/QtGui/qguiapplication_platform.h \
-		ui_signup.h
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/QTcpSocket \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/qtcpsocket.h \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/qtnetworkglobal.h \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/qtnetwork-config.h \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/qtnetworkexports.h \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/qabstractsocket.h \
+		D:/QT/6.9.2/mingw_64/include/QtNetwork/qhostaddress.h \
+		ui_signup.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/QVariant \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QApplication \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qapplication.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QFormLayout \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qformlayout.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QLayout \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qlayout.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qlayoutitem.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qboxlayout.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qgridlayout.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QHBoxLayout \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QLabel \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qlabel.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qframe.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qpicture.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qtextdocument.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QLineEdit \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qlineedit.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qtextcursor.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qtextformat.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qpen.h \
+		D:/QT/6.9.2/mingw_64/include/QtGui/qtextoption.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QPushButton \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qpushbutton.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qabstractbutton.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QSpacerItem \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QVBoxLayout \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QMessageBox \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qmessagebox.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qdialog.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/QJsonDocument \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qjsondocument.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qjsonparseerror.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qjsonvalue.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qcborvalue.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qcborcommon.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qdatetime.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qcalendar.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qregularexpression.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/quuid.h \
+		D:/QT/6.9.2/mingw_64/include/QtCore/QJsonObject \
+		D:/QT/6.9.2/mingw_64/include/QtCore/qjsonobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\signup.o signup.cpp
 
 release/moc_chatwindow.o: release/moc_chatwindow.cpp 

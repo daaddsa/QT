@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "chatwindow.h"
 #include "login.h"
 #include <QCoreApplication>
 #include <QDateTime>
@@ -14,10 +15,12 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , m_socket(nullptr)
+    , m_chatWindow(nullptr)
 {
     ui->setupUi(this);
 
     connect(ui->btnSend, &QPushButton::clicked, this, &MainWindow::onSendClicked);
+    connect(ui->treeContacts, &QTreeWidget::itemDoubleClicked, this, &MainWindow::onContactDoubleClicked);
     auto *sendShortcut1 = new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_Return), this);
     auto *sendShortcut2 = new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_Enter), this);
     connect(sendShortcut1, &QShortcut::activated, this, &MainWindow::onSendClicked);
@@ -57,7 +60,7 @@ void MainWindow::onLoginSuccess(QTcpSocket *socket)
     ui->lblStatus->setText("在线");
     appendLog(QString("已连接服务器：%1:%2").arg(m_socket->peerAddress().toString()).arg(m_socket->peerPort()));
 
-    connect(m_socket, &QTcpSocket::readyRead, this, &MainWindow::onSocketReadyRead);
+    connect(m_socket, &QTcpSocket::readyRead, this, &MainWindow::onSocketReadyRead, Qt::UniqueConnection);
     connect(m_socket, &QTcpSocket::disconnected, this, [this]() {
         ui->lblStatus->setText("离线");
         appendLog("与服务器断开连接");
@@ -67,6 +70,57 @@ void MainWindow::onLoginSuccess(QTcpSocket *socket)
     });
 
     this->show();
+}
+
+void MainWindow::onContactDoubleClicked(QTreeWidgetItem *item, int)
+{
+    if (!item || item->childCount() > 0) return;
+    if (!m_socket || m_socket->state() != QAbstractSocket::ConnectedState) {
+        appendLog("未连接服务器，无法打开对话窗口");
+        return;
+    }
+
+    const QString target = item->text(0).trimmed();
+    if (target.isEmpty()) return;
+
+    if (m_chatWindow) {
+        m_chatWindow->raise();
+        m_chatWindow->activateWindow();
+    } else {
+        m_chatWindow = new chatWindow(nullptr);
+        m_chatWindow->setAttribute(Qt::WA_DeleteOnClose);
+        connect(m_chatWindow, &chatWindow::requestClose, this, &MainWindow::onChatWindowClosed);
+        connect(m_chatWindow, &QObject::destroyed, this, [this]() {
+            m_chatWindow = nullptr;
+            onChatWindowClosed();
+        });
+    }
+
+    QStringList users;
+    for (int i = 0; i < ui->treeContacts->topLevelItemCount(); ++i) {
+        auto *top = ui->treeContacts->topLevelItem(i);
+        for (int j = 0; j < top->childCount(); ++j) users.append(top->child(j)->text(0));
+    }
+    m_chatWindow->setParticipants(users);
+
+    const QString title = (target == m_username) ? "群聊" : QString("与 %1 的对话").arg(target);
+    m_chatWindow->setConversationTitle(title);
+    ui->lblConversationTitle->setText(title);
+
+    disconnect(m_socket, &QTcpSocket::readyRead, this, &MainWindow::onSocketReadyRead);
+    m_chatWindow->attachSocket(m_socket, m_username);
+    m_chatWindow->show();
+    m_chatWindow->raise();
+    m_chatWindow->activateWindow();
+}
+
+void MainWindow::onChatWindowClosed()
+{
+    if (!m_socket) return;
+    if (m_chatWindow) {
+        m_chatWindow->attachSocket(nullptr, m_username);
+    }
+    connect(m_socket, &QTcpSocket::readyRead, this, &MainWindow::onSocketReadyRead, Qt::UniqueConnection);
 }
 
 void MainWindow::onSocketReadyRead()

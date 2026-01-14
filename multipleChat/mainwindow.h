@@ -10,6 +10,10 @@ class MainWindow;
 }
 QT_END_NAMESPACE
 
+class QTreeWidgetItem;
+class chatWindow;
+
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -24,6 +28,8 @@ public slots:
 private slots:
     void onSocketReadyRead();
     void onSendClicked();
+    void onContactDoubleClicked(QTreeWidgetItem *item, int column);
+    void onChatWindowClosed();
 
 private:
     void appendLog(const QString &msg);
@@ -34,5 +40,6 @@ private:
     Ui::MainWindow *ui;
     QTcpSocket *m_socket;
     QString m_username;
+    chatWindow *m_chatWindow;
 };
 #endif // MAINWINDOW_H

@@ -29,3 +29,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DESTDIR = $$PWD/../bin
 TARGET = chatServer
+
+win32 {
+    DEPLOYQT = $$shell_path($$[QT_INSTALL_BINS]/windeployqt.exe)
+    TARGET_PATH = $$shell_path($$DESTDIR/$$TARGET.exe)
+    QMAKE_POST_LINK += $$quote($$DEPLOYQT) $$quote($$TARGET_PATH)
+}
