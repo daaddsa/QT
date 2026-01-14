@@ -1395,10 +1395,7 @@ release/chatwindow.o: chatwindow.cpp chatwindow.h \
 		D:/QT/6.9.2/mingw_64/include/QtGui/qinputmethod.h \
 		D:/QT/6.9.2/mingw_64/include/QtCore/qlocale.h \
 		D:/QT/6.9.2/mingw_64/include/QtGui/qguiapplication_platform.h \
-		ui_chatwindow.h \
-		D:/QT/6.9.2/mingw_64/include/QtCore/QVariant \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/QApplication \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/qapplication.h
+		ui_chatwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\chatwindow.o chatwindow.cpp
 
 release/login.o: login.cpp login.h \
@@ -1607,32 +1604,6 @@ release/login.o: login.cpp login.h \
 		D:/QT/6.9.2/mingw_64/include/QtNetwork/qabstractsocket.h \
 		D:/QT/6.9.2/mingw_64/include/QtNetwork/qhostaddress.h \
 		ui_login.h \
-		D:/QT/6.9.2/mingw_64/include/QtCore/QVariant \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/QApplication \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/qapplication.h \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/QFormLayout \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/qformlayout.h \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/QLayout \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/qlayout.h \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/qlayoutitem.h \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/qboxlayout.h \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/qgridlayout.h \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/QLabel \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/qlabel.h \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/qframe.h \
-		D:/QT/6.9.2/mingw_64/include/QtGui/qpicture.h \
-		D:/QT/6.9.2/mingw_64/include/QtGui/qtextdocument.h \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/QLineEdit \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/qlineedit.h \
-		D:/QT/6.9.2/mingw_64/include/QtGui/qtextcursor.h \
-		D:/QT/6.9.2/mingw_64/include/QtGui/qtextformat.h \
-		D:/QT/6.9.2/mingw_64/include/QtGui/qpen.h \
-		D:/QT/6.9.2/mingw_64/include/QtGui/qtextoption.h \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/QPushButton \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/qpushbutton.h \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/qabstractbutton.h \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/QSpacerItem \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/QVBoxLayout \
 		D:/QT/6.9.2/mingw_64/include/QtWidgets/QMessageBox \
 		D:/QT/6.9.2/mingw_64/include/QtWidgets/qmessagebox.h \
 		D:/QT/6.9.2/mingw_64/include/QtWidgets/qdialog.h \
@@ -2073,16 +2044,8 @@ release/mainwindow.o: mainwindow.cpp mainwindow.h \
 		D:/QT/6.9.2/mingw_64/include/QtNetwork/qabstractsocket.h \
 		D:/QT/6.9.2/mingw_64/include/QtNetwork/qhostaddress.h \
 		ui_mainwindow.h \
-		D:/QT/6.9.2/mingw_64/include/QtCore/QVariant \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/QApplication \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/qapplication.h \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/QMenuBar \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/qmenubar.h \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/qmenu.h \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/QStatusBar \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/qstatusbar.h \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/QWidget \
 		login.h \
+		D:/QT/6.9.2/mingw_64/include/QtWidgets/QWidget \
 		D:/QT/6.9.2/mingw_64/include/QtCore/QCoreApplication \
 		D:/QT/6.9.2/mingw_64/include/QtCore/QTimer \
 		D:/QT/6.9.2/mingw_64/include/QtCore/qtimer.h
@@ -2286,10 +2249,7 @@ release/searchdialog.o: searchdialog.cpp searchdialog.h \
 		D:/QT/6.9.2/mingw_64/include/QtGui/qinputmethod.h \
 		D:/QT/6.9.2/mingw_64/include/QtCore/qlocale.h \
 		D:/QT/6.9.2/mingw_64/include/QtGui/qguiapplication_platform.h \
-		ui_searchdialog.h \
-		D:/QT/6.9.2/mingw_64/include/QtCore/QVariant \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/QApplication \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/qapplication.h
+		ui_searchdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\searchdialog.o searchdialog.cpp
 
 release/signup.o: signup.cpp signup.h \
@@ -2490,10 +2450,7 @@ release/signup.o: signup.cpp signup.h \
 		D:/QT/6.9.2/mingw_64/include/QtGui/qinputmethod.h \
 		D:/QT/6.9.2/mingw_64/include/QtCore/qlocale.h \
 		D:/QT/6.9.2/mingw_64/include/QtGui/qguiapplication_platform.h \
-		ui_signup.h \
-		D:/QT/6.9.2/mingw_64/include/QtCore/QVariant \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/QApplication \
-		D:/QT/6.9.2/mingw_64/include/QtWidgets/qapplication.h
+		ui_signup.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\signup.o signup.cpp
 
 release/moc_chatwindow.o: release/moc_chatwindow.cpp 
