@@ -12,6 +12,7 @@ QT_END_NAMESPACE
 
 class QTreeWidgetItem;
 class chatWindow;
+class searchDialog;
 
 
 class MainWindow : public QMainWindow
@@ -30,16 +31,19 @@ private slots:
     void onSendClicked();
     void onContactDoubleClicked(QTreeWidgetItem *item, int column);
     void onChatWindowClosed();
+    void onMainSearchReturnPressed();
 
 private:
     void appendLog(const QString &msg);
     void appendChat(const QString &sender, const QString &text);
     void refreshUserList(const QStringList &users);
+    void openChatToTarget(const QString &target);
 
 private:
     Ui::MainWindow *ui;
     QTcpSocket *m_socket;
     QString m_username;
     chatWindow *m_chatWindow;
+    searchDialog *m_searchDialog;
 };
 #endif // MAINWINDOW_H

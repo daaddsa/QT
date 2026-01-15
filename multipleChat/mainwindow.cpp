@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "chatwindow.h"
 #include "login.h"
+#include "searchdialog.h"
 #include <QCoreApplication>
 #include <QDateTime>
 #include <QJsonArray>
@@ -16,11 +17,13 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
     , m_socket(nullptr)
     , m_chatWindow(nullptr)
+    , m_searchDialog(nullptr)
 {
     ui->setupUi(this);
 
     connect(ui->btnSend, &QPushButton::clicked, this, &MainWindow::onSendClicked);
     connect(ui->treeContacts, &QTreeWidget::itemDoubleClicked, this, &MainWindow::onContactDoubleClicked);
+    connect(ui->txtSearch, &QLineEdit::returnPressed, this, &MainWindow::onMainSearchReturnPressed);
     auto *sendShortcut1 = new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_Return), this);
     auto *sendShortcut2 = new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_Enter), this);
     connect(sendShortcut1, &QShortcut::activated, this, &MainWindow::onSendClicked);
@@ -81,7 +84,61 @@ void MainWindow::onContactDoubleClicked(QTreeWidgetItem *item, int)
     }
 
     const QString target = item->text(0).trimmed();
+    openChatToTarget(target);
+}
+
+void MainWindow::onChatWindowClosed()
+{
+    if (!m_socket) return;
+    if (m_chatWindow) {
+        m_chatWindow->attachSocket(nullptr, m_username);
+    }
+    connect(m_socket, &QTcpSocket::readyRead, this, &MainWindow::onSocketReadyRead, Qt::UniqueConnection);
+}
+
+void MainWindow::onMainSearchReturnPressed()
+{
+    const QString query = ui->txtSearch->text().trimmed();
+    if (!m_searchDialog) {
+        m_searchDialog = new searchDialog(nullptr);
+        m_searchDialog->setAttribute(Qt::WA_DeleteOnClose);
+        connect(m_searchDialog, &QObject::destroyed, this, [this]() { m_searchDialog = nullptr; });
+        connect(m_searchDialog, &searchDialog::contactActivated, this, [this](const QString &username) {
+            openChatToTarget(username);
+        });
+    }
+
+    QStringList contacts;
+    for (int i = 0; i < ui->treeContacts->topLevelItemCount(); ++i) {
+        auto *top = ui->treeContacts->topLevelItem(i);
+        for (int j = 0; j < top->childCount(); ++j) contacts.append(top->child(j)->text(0));
+    }
+
+    QStringList groups;
+    for (int i = 0; i < ui->listGroups->count(); ++i) {
+        const QString g = ui->listGroups->item(i)->text().trimmed();
+        if (!g.isEmpty()) groups.append(g);
+    }
+
+    const QString history = ui->txtChatHistory->toPlainText();
+    QStringList messages = history.split('\n', Qt::SkipEmptyParts);
+
+    m_searchDialog->setContacts(contacts);
+    m_searchDialog->setGroups(groups);
+    m_searchDialog->setMessages(messages);
+    m_searchDialog->setQueryAndSearch(query);
+    m_searchDialog->show();
+    m_searchDialog->raise();
+    m_searchDialog->activateWindow();
+}
+
+void MainWindow::openChatToTarget(const QString &target)
+{
     if (target.isEmpty()) return;
+    if (!m_socket || m_socket->state() != QAbstractSocket::ConnectedState) {
+        appendLog("未连接服务器，无法打开对话窗口");
+        return;
+    }
 
     if (m_chatWindow) {
         m_chatWindow->raise();
@@ -112,15 +169,6 @@ void MainWindow::onContactDoubleClicked(QTreeWidgetItem *item, int)
     m_chatWindow->show();
     m_chatWindow->raise();
     m_chatWindow->activateWindow();
-}
-
-void MainWindow::onChatWindowClosed()
-{
-    if (!m_socket) return;
-    if (m_chatWindow) {
-        m_chatWindow->attachSocket(nullptr, m_username);
-    }
-    connect(m_socket, &QTcpSocket::readyRead, this, &MainWindow::onSocketReadyRead, Qt::UniqueConnection);
 }
 
 void MainWindow::onSocketReadyRead()
