@@ -250,3 +250,100 @@
     *   **操作**: 支持强制下线.
 *   **配置说明**: 最大连接数、数据库路径等参数将在代码中作为常量固定，不再提供界面配置。
 
+### 🗺️ 多人即时通讯系统 - 整体开发计划 ✅ 里程碑 1：基础设施搭建 (Infrastructure) —— [当前阶段]
+目标 ：搭建好服务端和客户端的架子，确保两端能运行并拥有基础界面。
+
+- 服务端 ：
+  - 主界面框架（监控、日志、用户列表）。
+  - 核心网络类 ChatServer （监听端口）。
+- 客户端 ：
+  - 登录界面 UI ( login.ui )。
+  - 主界面框架 ( mainwindow.ui )。
+  - 网络连接逻辑 （Socket 接入）。 🚧 里程碑 2：核心通信链路 (Core Connectivity) —— [下一步重点]
+目标 ：打通“登录”流程，实现客户端与服务器的第一次握手。
+
+- 协议定义 ：制定 JSON 通信协议（登录、消息、状态更新）。
+- 服务端 ：
+  - 实现 ServerWorker 类：处理单用户连接，负责解析 JSON。
+  - 实现用户注册/登录处理逻辑（暂用内存存储用户列表）。
+- 客户端 ：
+  - 实现登录逻辑：发送 login 请求。
+  - 处理登录响应：成功则跳转主界面，失败则弹窗提示。 里程碑 3：用户列表与状态同步 (User Presence)
+目标 ：让用户知道“谁在线”。
+
+- 服务端 ：
+  - 当新用户上线/下线时，向所有在线用户广播 userList 或 statusUpdate 消息。
+- 客户端 ：
+  - 解析用户列表数据。
+  - 在主界面的 QTreeWidget （好友列表）中动态展示在线用户。
+  - 处理“新用户上线”的通知，实时刷新列表。 里程碑 4：即时消息传输 (Messaging)
+目标 ：实现核心聊天功能（单聊 + 群聊）。
+
+- 单聊 ：
+  - 双击好友打开 ChatWindow 。
+  - 发送消息 -> 服务器转发 -> 目标用户接收。
+- 群聊 （广播）：
+  - 在“群组”Tab 下发送消息 -> 服务器广播给所有人。
+- 界面优化 ：
+  - 实现气泡式聊天界面（左侧对方，右侧自己）。 里程碑 5：高级特性与完善 (Polishing)
+目标 ：提升可用性和稳定性。
+
+- 查找与添加 ：实现 SearchDialog ，支持搜索在线用户。
+- 断线重连 ：客户端网络断开后的自动重连机制。
+- 服务端管理 ：实现“强制下线（踢人）”的具体逻辑。
+- 持久化（可选） ：引入 SQLite 数据库保存聊天记录和用户账号。
+### 🚀 立即执行计划
+为了推进到 里程碑 2 ，建议按以下顺序行动：
+
+1. 完善客户端 Login 逻辑 ：让 login.cpp 能够真正发起 Socket 连接。
+2. 创建 ServerWorker ：在服务端建立处理客户端消息的工人类。
+3. 联调登录 ：验证数据包能否正确发送和解析。
+您想先开始写客户端的连接代码，还是先去服务端准备 ServerWorker ？
+
+---
+
+## 8. 问题排查记录
+
+### 8.1 Qt Creator 提示“未指定可执行文件/无法运行”
+
+**现象**
+- 点击运行时提示未指定可执行文件，或可执行文件路径为空/无效。
+
+**原因**
+- 运行配置与当前项目路径不一致（目录移动/重命名后，RunConfiguration 的 BuildKey 指向旧路径），导致 Qt Creator 无法解析出目标可执行文件。
+
+**解决**
+- 删除项目根目录下的 `multipleChat.pro.user`，重新用 Qt Creator 打开 `multipleChat.pro` 让其自动重建运行配置。
+
+### 8.2 命令行构建时 qmake/g++ 找不到或 g++ 报 cc1plus 缺失
+
+**现象**
+- `qmake` 不在 PATH：终端提示找不到 `qmake`。
+- `g++` 报错：`cannot execute 'cc1plus': CreateProcess: No such file or directory`。
+
+**原因**
+- Qt/MinGW 工具链未加入 PATH，导致 Makefile 内部调用的 `g++` 解析到系统中其他编译器或不完整的工具链。
+
+**解决**
+- 使用 Qt 安装目录下的工具链直接构建，并在构建命令中临时设置 PATH，使 `g++/gcc` 指向同一套 MinGW：
+  - Qt：`D:\QT\6.9.2\mingw_64\bin\qmake.exe`
+  - MinGW：`D:\QT\Tools\mingw1310_64\bin\mingw32-make.exe`
+
+### 8.3 独立运行 exe 缺少 Qt DLL/平台插件
+
+**现象**
+- 双击运行 exe 或从终端运行时启动失败（平台插件初始化失败等）。
+
+**原因**
+- 可执行文件所在目录缺少 Qt 运行时依赖（Qt6*.dll、platforms/qwindows.dll 等）。
+
+**解决**
+- 对生成的可执行文件执行 `windeployqt` 将依赖复制到同目录：
+  - `D:\QT\6.9.2\mingw_64\bin\windeployqt.exe --compiler-runtime --no-translations bin\multipleChat.exe`
+  - `D:\QT\6.9.2\mingw_64\bin\windeployqt.exe --compiler-runtime --no-translations bin\chatServer.exe`
+
+### 8.4 自动化冒烟测试入口
+
+为便于集成/回归验证，客户端与服务端支持参数：
+- `--smoke-test`：启动后约 200ms 自动退出。
+- `--no-login`（仅客户端）：跳过登录窗口，直接展示主窗口（配合 `--smoke-test` 使用）。

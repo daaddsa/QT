@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -34,3 +34,12 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DESTDIR = $$PWD/bin
+TARGET = multipleChat
+
+win32 {
+    DEPLOYQT = $$shell_path($$[QT_INSTALL_BINS]/windeployqt.exe)
+    TARGET_PATH = $$shell_path($$DESTDIR/$$TARGET.exe)
+    QMAKE_POST_LINK += $$quote($$DEPLOYQT) $$quote($$TARGET_PATH)
+}

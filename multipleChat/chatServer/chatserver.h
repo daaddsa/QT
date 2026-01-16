@@ -3,6 +3,9 @@
 
 #include <QTcpServer>
 #include <QList>
+#include <QHash>
+#include <QSqlDatabase>
+#include "serverworker.h"
 
 class ChatServer : public QTcpServer
 {
@@ -11,6 +14,7 @@ public:
     explicit ChatServer(QObject *parent = nullptr);
     bool startServer(int port);
     void stopServer();
+    void broadcast(const QJsonObject &message, ServerWorker *exclude = nullptr);
 
 protected:
     void incomingConnection(qintptr socketDescriptor) override;
@@ -18,9 +22,26 @@ protected:
 signals:
     void logMessage(const QString &msg);
 
+private slots:
+    void jsonReceived(const QJsonObject &jsonDoc, ServerWorker *sender);
+    void userDisconnected(ServerWorker *sender);
+
 private:
-    // TODO: 这里将来会存放 ServerWorker 列表
-    // QList<ServerWorker *> m_clients;
+    bool ensureDatabaseOpen();
+    QString resolveDatabasePath() const;
+    void ensureSchema();
+    int findUserIdByNickname(const QString &nickname);
+    int ensureDirectConversation(int userId1, int userId2);
+    int ensureGroupConversation();
+    void deliverUndeliveredMessages(ServerWorker *recipient);
+
+    struct RegisteredUser {
+        QString nickname;
+        QString password;
+    };
+    QList<ServerWorker *> m_clients;
+    QHash<QString, RegisteredUser> m_registeredUsers;
+    QSqlDatabase m_db;
 };
 
 #endif // CHATSERVER_H
