@@ -26,6 +26,26 @@ void ServerWorker::setUserName(const QString &user)
     m_userName = user;
 }
 
+int ServerWorker::userId() const
+{
+    return m_userId;
+}
+
+void ServerWorker::setUserId(int id)
+{
+    m_userId = id;
+}
+
+QString ServerWorker::account() const
+{
+    return m_account;
+}
+
+void ServerWorker::setAccount(const QString &account)
+{
+    m_account = account;
+}
+
 void ServerWorker::sendJson(const QJsonObject &json)
 {
     const QByteArray jsonData = QJsonDocument(json).toJson(QJsonDocument::Compact);
@@ -50,8 +70,6 @@ void ServerWorker::onReadyRead()
             if (jsonDoc.isObject()) {
                 emit jsonReceived(jsonDoc.object());
             }
-        } else {
-            emit logMessage(QString("JSON Parse Error: %1").arg(parseError.errorString()));
         }
     }
 }

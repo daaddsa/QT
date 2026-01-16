@@ -10,6 +10,8 @@
 #include <QJsonObject>
 #include <QJsonParseError>
 #include <QShortcut>
+#include <QInputDialog>
+#include <QMessageBox>
 #include <QTimer>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -24,6 +26,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->btnSend, &QPushButton::clicked, this, &MainWindow::onSendClicked);
     connect(ui->treeContacts, &QTreeWidget::itemDoubleClicked, this, &MainWindow::onContactDoubleClicked);
     connect(ui->txtSearch, &QLineEdit::returnPressed, this, &MainWindow::onMainSearchReturnPressed);
+    connect(ui->btnAdd, &QPushButton::clicked, this, &MainWindow::onAddClicked);
+    connect(ui->btnCreateGroup, &QPushButton::clicked, this, &MainWindow::onCreateGroupClicked);
+    connect(ui->listGroups, &QListWidget::itemDoubleClicked, this, [this]() { onGroupDoubleClicked(); });
     auto *sendShortcut1 = new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_Return), this);
     auto *sendShortcut2 = new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_Enter), this);
     connect(sendShortcut1, &QShortcut::activated, this, &MainWindow::onSendClicked);
@@ -93,6 +98,8 @@ void MainWindow::onChatWindowClosed()
     if (m_chatWindow) {
         m_chatWindow->attachSocket(nullptr, m_username);
     }
+    ui->btnAdd->setEnabled(true);
+    ui->btnCreateGroup->setEnabled(true);
     connect(m_socket, &QTcpSocket::readyRead, this, &MainWindow::onSocketReadyRead, Qt::UniqueConnection);
 }
 
@@ -162,6 +169,8 @@ void MainWindow::openChatToTarget(const QString &target)
 
     const QString title = (target == m_username) ? "群聊" : QString("与 %1 的对话").arg(target);
     m_chatWindow->setConversationTitle(title);
+    m_chatWindow->setChatTarget(target);
+    m_chatWindow->setConversationId(0);
     ui->lblConversationTitle->setText(title);
 
     disconnect(m_socket, &QTcpSocket::readyRead, this, &MainWindow::onSocketReadyRead);
@@ -169,6 +178,53 @@ void MainWindow::openChatToTarget(const QString &target)
     m_chatWindow->show();
     m_chatWindow->raise();
     m_chatWindow->activateWindow();
+
+    ui->btnAdd->setEnabled(false);
+    ui->btnCreateGroup->setEnabled(false);
+}
+
+void MainWindow::openGroupConversation(int conversationId, const QString &title)
+{
+    if (conversationId <= 0) return;
+    if (!m_socket || m_socket->state() != QAbstractSocket::ConnectedState) {
+        appendLog("未连接服务器，无法打开对话窗口");
+        return;
+    }
+
+    if (m_chatWindow) {
+        m_chatWindow->raise();
+        m_chatWindow->activateWindow();
+    } else {
+        m_chatWindow = new chatWindow(nullptr);
+        m_chatWindow->setAttribute(Qt::WA_DeleteOnClose);
+        connect(m_chatWindow, &chatWindow::requestClose, this, &MainWindow::onChatWindowClosed);
+        connect(m_chatWindow, &QObject::destroyed, this, [this]() {
+            m_chatWindow = nullptr;
+            onChatWindowClosed();
+        });
+    }
+
+    QStringList users;
+    for (int i = 0; i < ui->treeContacts->topLevelItemCount(); ++i) {
+        auto *top = ui->treeContacts->topLevelItem(i);
+        for (int j = 0; j < top->childCount(); ++j) users.append(top->child(j)->text(0));
+    }
+    m_chatWindow->setParticipants(users);
+
+    const QString windowTitle = title.isEmpty() ? "群聊" : QString("群聊：%1").arg(title);
+    m_chatWindow->setConversationTitle(windowTitle);
+    m_chatWindow->setChatTarget(m_username);
+    m_chatWindow->setConversationId(conversationId);
+    ui->lblConversationTitle->setText(windowTitle);
+
+    disconnect(m_socket, &QTcpSocket::readyRead, this, &MainWindow::onSocketReadyRead);
+    m_chatWindow->attachSocket(m_socket, m_username);
+    m_chatWindow->show();
+    m_chatWindow->raise();
+    m_chatWindow->activateWindow();
+
+    ui->btnAdd->setEnabled(false);
+    ui->btnCreateGroup->setEnabled(false);
 }
 
 void MainWindow::onSocketReadyRead()
@@ -226,10 +282,106 @@ void MainWindow::onSocketReadyRead()
             if (!sender.isEmpty() && !text.isEmpty()) {
                 appendChat(sender, text);
             }
+        } else if (type == "check_user_response") {
+            const bool success = root.value("success").toBool();
+            const QString nickname = root.value("nickname").toString().trimmed();
+            if (success && !nickname.isEmpty() && nickname == m_pendingCheckNickname) {
+                m_pendingCheckNickname.clear();
+                openChatToTarget(nickname);
+            } else if (nickname == m_pendingCheckNickname) {
+                m_pendingCheckNickname.clear();
+                QMessageBox::warning(this, "提示", "用户不存在");
+            }
+        } else if (type == "create_group_response") {
+            const bool success = root.value("success").toBool();
+            const int conversationId = root.value("conversation_id").toInt();
+            const QString title = root.value("title").toString();
+            if (!success || conversationId <= 0) {
+                QMessageBox::warning(this, "提示", root.value("message").toString().isEmpty() ? "建群失败" : root.value("message").toString());
+                continue;
+            }
+            auto *item = new QListWidgetItem(title.isEmpty() ? "未命名群" : title);
+            item->setData(Qt::UserRole, conversationId);
+            ui->listGroups->addItem(item);
+            appendLog(QString("建群成功：%1(id=%2)").arg(item->text()).arg(conversationId));
+        } else if (type == "group_list") {
+            ui->listGroups->clear();
+            const QJsonArray groups = root.value("groups").toArray();
+            for (const QJsonValue &v : groups) {
+                if (!v.isObject()) continue;
+                const QJsonObject g = v.toObject();
+                const int id = g.value("id").toInt();
+                const QString title = g.value("title").toString();
+                if (id <= 0) continue;
+                auto *item = new QListWidgetItem(title.isEmpty() ? QString("群%1").arg(id) : title);
+                item->setData(Qt::UserRole, id);
+                ui->listGroups->addItem(item);
+            }
         } else {
             appendLog(QString("收到未知消息类型：%1").arg(type));
         }
     }
+}
+
+void MainWindow::onAddClicked()
+{
+    if (!m_socket || m_socket->state() != QAbstractSocket::ConnectedState) {
+        QMessageBox::warning(this, "提示", "未连接服务器");
+        return;
+    }
+
+    bool ok = false;
+    const QString nickname = QInputDialog::getText(this, "添加", "输入对方昵称：", QLineEdit::Normal, "", &ok).trimmed();
+    if (!ok || nickname.isEmpty()) return;
+    if (nickname == m_username) {
+        QMessageBox::warning(this, "提示", "不能添加自己");
+        return;
+    }
+
+    m_pendingCheckNickname = nickname;
+    QJsonObject req;
+    req["type"] = "check_user";
+    req["nickname"] = nickname;
+    m_socket->write(QJsonDocument(req).toJson(QJsonDocument::Compact) + "\n");
+}
+
+void MainWindow::onCreateGroupClicked()
+{
+    if (!m_socket || m_socket->state() != QAbstractSocket::ConnectedState) {
+        QMessageBox::warning(this, "提示", "未连接服务器");
+        return;
+    }
+
+    bool ok = false;
+    const QString title = QInputDialog::getText(this, "建群", "群名称：", QLineEdit::Normal, "我的群聊", &ok).trimmed();
+    if (!ok || title.isEmpty()) return;
+
+    const QString hint = "输入成员昵称（逗号分隔，可空）：";
+    const QString membersText = QInputDialog::getText(this, "建群", hint, QLineEdit::Normal, "", &ok);
+    if (!ok) return;
+
+    QStringList members = membersText.split(',', Qt::SkipEmptyParts);
+    for (QString &m : members) m = m.trimmed();
+    members.removeAll(QString());
+    if (!members.contains(m_username)) members.prepend(m_username);
+    members.removeDuplicates();
+
+    QJsonArray arr;
+    for (const QString &m : members) arr.append(m);
+
+    QJsonObject req;
+    req["type"] = "create_group";
+    req["title"] = title;
+    req["members"] = arr;
+    m_socket->write(QJsonDocument(req).toJson(QJsonDocument::Compact) + "\n");
+}
+
+void MainWindow::onGroupDoubleClicked()
+{
+    auto *item = ui->listGroups->currentItem();
+    if (!item) return;
+    const int conversationId = item->data(Qt::UserRole).toInt();
+    openGroupConversation(conversationId, item->text().trimmed());
 }
 
 void MainWindow::onSendClicked()

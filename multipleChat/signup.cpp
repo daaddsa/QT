@@ -107,7 +107,7 @@ void signUp::onReadyRead()
 
         if (success) {
             QMessageBox::information(this, "成功", "注册成功！");
-            emit signUpSuccess(m_pendingNickname.isEmpty() ? ui->txtNickname->text().trimmed() : m_pendingNickname);
+            emit signUpSuccess(m_pendingAccount.isEmpty() ? ui->txtAccount->text().trimmed() : m_pendingAccount);
             close();
             return;
         }

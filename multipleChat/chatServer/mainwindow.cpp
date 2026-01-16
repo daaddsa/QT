@@ -91,7 +91,5 @@ void MainWindow::on_btnKick_clicked()
     }
 
     QString account = ui->tblUsers->item(currentRow, 1)->text(); // 假设第2列是账号
-    
-    // TODO: 调用服务器逻辑强制断开该用户连接
-    logMessage(QString("管理员强制下线用户: %1").arg(account));
+    Q_UNUSED(account);
 }

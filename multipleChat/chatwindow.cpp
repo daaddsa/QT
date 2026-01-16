@@ -55,6 +55,16 @@ void chatWindow::setConversationTitle(const QString &title)
     setWindowTitle(title);
 }
 
+void chatWindow::setChatTarget(const QString &target)
+{
+    m_target = target.trimmed();
+}
+
+void chatWindow::setConversationId(int conversationId)
+{
+    m_conversationId = conversationId;
+}
+
 void chatWindow::setParticipants(const QStringList &users)
 {
     m_participants = users;
@@ -99,9 +109,18 @@ void chatWindow::onSocketReadyRead()
         } else if (type == "message") {
             const QString sender = root.value("sender").toString();
             const QString text = root.value("text").toString();
-            if (!sender.isEmpty() && !text.isEmpty()) {
-                appendMessage(sender, text);
+            if (sender.isEmpty() || text.isEmpty()) continue;
+            const int convId = root.value("conversation_id").toInt();
+            const QString to = root.value("to").toString();
+            if (m_conversationId > 0) {
+                if (convId == m_conversationId) appendMessage(sender, text);
+                continue;
             }
+            if (!m_target.isEmpty() && m_target != m_username) {
+                if (sender == m_target || to == m_target) appendMessage(sender, text);
+                continue;
+            }
+            appendMessage(sender, text);
         }
     }
 }
@@ -115,6 +134,12 @@ void chatWindow::onSendClicked()
     QJsonObject json;
     json["type"] = "message";
     json["text"] = text;
+    if (m_conversationId > 0) {
+        json["conversation_id"] = m_conversationId;
+    }
+    if (!m_target.isEmpty() && m_target != m_username) {
+        json["to"] = m_target;
+    }
     const QByteArray payload = QJsonDocument(json).toJson(QJsonDocument::Compact);
     m_socket->write(payload + "\n");
     ui->txtInput->clear();

@@ -14,6 +14,10 @@ public:
     virtual bool setSocketDescriptor(qintptr socketDescriptor);
     QString userName() const;
     void setUserName(const QString &user);
+    int userId() const;
+    void setUserId(int id);
+    QString account() const;
+    void setAccount(const QString &account);
     void sendJson(const QJsonObject &json);
 
 signals:
@@ -31,6 +35,8 @@ private slots:
 private:
     QTcpSocket *m_serverSocket;
     QString m_userName;
+    int m_userId = 0;
+    QString m_account;
 };
 
 #endif // SERVERWORKER_H

@@ -4,6 +4,7 @@
 #include <QTcpServer>
 #include <QList>
 #include <QHash>
+#include <QSqlDatabase>
 #include "serverworker.h"
 
 class ChatServer : public QTcpServer
@@ -26,12 +27,21 @@ private slots:
     void userDisconnected(ServerWorker *sender);
 
 private:
+    bool ensureDatabaseOpen();
+    QString resolveDatabasePath() const;
+    void ensureSchema();
+    int findUserIdByNickname(const QString &nickname);
+    int ensureDirectConversation(int userId1, int userId2);
+    int ensureGroupConversation();
+    void deliverUndeliveredMessages(ServerWorker *recipient);
+
     struct RegisteredUser {
         QString nickname;
         QString password;
     };
     QList<ServerWorker *> m_clients;
     QHash<QString, RegisteredUser> m_registeredUsers;
+    QSqlDatabase m_db;
 };
 
 #endif // CHATSERVER_H

@@ -32,12 +32,16 @@ private slots:
     void onContactDoubleClicked(QTreeWidgetItem *item, int column);
     void onChatWindowClosed();
     void onMainSearchReturnPressed();
+    void onAddClicked();
+    void onCreateGroupClicked();
+    void onGroupDoubleClicked();
 
 private:
     void appendLog(const QString &msg);
     void appendChat(const QString &sender, const QString &text);
     void refreshUserList(const QStringList &users);
     void openChatToTarget(const QString &target);
+    void openGroupConversation(int conversationId, const QString &title);
 
 private:
     Ui::MainWindow *ui;
@@ -45,5 +49,6 @@ private:
     QString m_username;
     chatWindow *m_chatWindow;
     searchDialog *m_searchDialog;
+    QString m_pendingCheckNickname;
 };
 #endif // MAINWINDOW_H

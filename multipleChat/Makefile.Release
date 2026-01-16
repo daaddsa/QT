@@ -97,7 +97,7 @@ bin/multipleChat.exe: D:/QT/6.9.2/mingw_64/lib/libQt6Widgets.a D:/QT/6.9.2/mingw
 	D:\QT\6.9.2\mingw_64\bin\windeployqt.exe D:\Users\Lenovo\Desktop\Library\QTapplication\experiment3\multipleChat\bin\
 
 qmake: FORCE
-	@$(QMAKE) -o Makefile.Release multipleChat.pro -spec win32-g++
+	@$(QMAKE) -o Makefile.Release multipleChat.pro -spec win32-g++ "CONFIG+=debug"
 
 qmake_all: FORCE
 

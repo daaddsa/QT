@@ -27,10 +27,11 @@ void login::on_btnLogin_clicked()
 {
     QString ip = ui->txtServerIP->text();
     QString portStr = ui->txtPort->text();
-    QString username = ui->txtUsername->text();
+    QString account = ui->txtUsername->text();
+    QString password = ui->txtPassword->text();
 
-    if (ip.isEmpty() || portStr.isEmpty() || username.isEmpty()) {
-        QMessageBox::warning(this, "提示", "请完整填写服务器信息和用户名");
+    if (ip.isEmpty() || portStr.isEmpty() || account.isEmpty() || password.isEmpty()) {
+        QMessageBox::warning(this, "提示", "请完整填写服务器信息、账号和密码");
         return;
     }
 
@@ -86,7 +87,8 @@ void login::onConnected()
 {
     QJsonObject json;
     json["type"] = "login";
-    json["username"] = ui->txtUsername->text();
+    json["account"] = ui->txtUsername->text().trimmed();
+    json["password"] = ui->txtPassword->text();
 
     QJsonDocument doc(json);
     QByteArray data = doc.toJson(QJsonDocument::Compact);
@@ -121,8 +123,11 @@ void login::onReadyRead()
             bool success = root["success"].toBool();
             if (success) {
                 QMessageBox::information(this, "成功", "登录成功！");
+                const QString nickname = root.value("nickname").toString().trimmed();
+                const QString account = root.value("account").toString().trimmed();
                 m_socket->setParent(nullptr);
-                m_socket->setProperty("username", ui->txtUsername->text().trimmed());
+                m_socket->setProperty("username", nickname);
+                m_socket->setProperty("account", account);
                 emit loginSuccess(m_socket); 
                 this->close(); 
                 return;
